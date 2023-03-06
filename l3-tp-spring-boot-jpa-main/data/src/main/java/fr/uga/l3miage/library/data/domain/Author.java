@@ -15,13 +15,12 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
 @Entity(name="Author")
-@Table(name="author")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "fullName", length = 30)
+    @Column(length = 30)
     private String fullName;
     
     @ManyToMany
