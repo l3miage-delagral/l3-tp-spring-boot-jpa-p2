@@ -53,7 +53,7 @@ public class AuthorRepository implements CRUDRepository<Long, Author> {
      * @return une liste d'auteurs trié par nom
      */
     public List<Author> searchByName(String namePart) {
-        String jpql = "select * from author b where b.fullName like '%:namePart%'";
+        String jpql = "SELECT a FROM Author a WHERE a.fullName LIKE '%'' || :namePart || '%' ORDER BY a.fullName ASC";
 
         List<Author> res = entityManager.createQuery(jpql, Author.class)
         .setParameter("namePart", namePart)
