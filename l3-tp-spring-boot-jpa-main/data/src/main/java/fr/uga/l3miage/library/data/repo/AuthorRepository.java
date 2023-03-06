@@ -42,8 +42,13 @@ public class AuthorRepository implements CRUDRepository<Long, Author> {
     @Override
     public List<Author> all() {
         
-        // TODO
-        return null;
+        String jpql = "SELECT * FROM Author ORDER BY fullname ASC;";
+
+        List<Author> res = entityManager.createQuery(jpql, Author.class)
+        .getResultList();
+
+        return res;
+
     }
 
     /**
@@ -54,7 +59,13 @@ public class AuthorRepository implements CRUDRepository<Long, Author> {
      */
     public List<Author> searchByName(String namePart) {
 
-        return null;
+        String jpql = "SELECT * FROM Author WHERE fullname LIKE '%:namePart%' ORDER BY fullname ASC;";
+        
+        List<Author> res = entityManager.createQuery(jpql, Author.class)
+        .setParameter("namePart", namePart)
+        .getResultList();
+
+        return res;
     }
 
     /**
