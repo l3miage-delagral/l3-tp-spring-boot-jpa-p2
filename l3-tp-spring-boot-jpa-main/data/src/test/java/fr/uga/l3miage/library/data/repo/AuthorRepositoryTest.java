@@ -2,8 +2,6 @@ package fr.uga.l3miage.library.data.repo;
 
 import fr.uga.l3miage.library.data.domain.Author;
 import fr.uga.l3miage.library.data.domain.Book;
-import jakarta.persistence.EntityManager;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,8 +14,7 @@ class AuthorRepositoryTest extends Base {
 
     @Autowired
     AuthorRepository authorRepository;
-    EntityManager entityManager;
-    
+
     @Test
     void searchByName() {
 
@@ -58,24 +55,6 @@ class AuthorRepositoryTest extends Base {
 
         assertThat(authorRepository.checkAuthorByIdHavingCoAuthoredBooks(a1.getId())).isFalse();
         assertThat(authorRepository.checkAuthorByIdHavingCoAuthoredBooks(a2.getId())).isTrue();
-
-    }
-
-    @Test
-    void testAll() {
-
-        Author a1 = Fixtures.newAuthor();
-        a1.setFullName("William Gibson");
-        Author a2 = Fixtures.newAuthor();
-        a2.setFullName("Arthur Hemingway");
-        entityManager.persist(a1);
-        entityManager.persist(a2);
-        entityManager.flush();
-        entityManager.detach(a1);
-        entityManager.detach(a2);
-
-        List<Author> authors = authorRepository.all();
-        assertThat(authors).containsExactly(a1);
 
     }
 

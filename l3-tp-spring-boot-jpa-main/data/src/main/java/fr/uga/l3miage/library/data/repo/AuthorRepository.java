@@ -59,7 +59,7 @@ public class AuthorRepository implements CRUDRepository<Long, Author> {
         .setParameter("namePart", namePart)
         .getResultList();
 
-        return null;
+        return res;
     }
 
     /**
