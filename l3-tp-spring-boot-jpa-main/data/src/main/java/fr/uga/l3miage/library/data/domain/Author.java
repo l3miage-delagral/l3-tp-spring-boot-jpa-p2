@@ -12,7 +12,6 @@ public class Author {
 
     private Long id;
     private String fullName;
-
     @ManyToMany
     private Set<Book> books;
 
