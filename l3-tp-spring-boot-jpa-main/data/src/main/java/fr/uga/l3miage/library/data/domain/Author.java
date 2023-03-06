@@ -5,12 +5,14 @@ import java.util.Objects;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Author {
 
     private Long id;
     private String fullName;
+    @ManyToMany
     private Set<Book> books;
 
     public Long getId() {

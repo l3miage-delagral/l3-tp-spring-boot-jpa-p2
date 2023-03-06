@@ -1,6 +1,7 @@
 package fr.uga.l3miage.library.data.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Transient;
 
 import java.util.HashSet;
@@ -17,7 +18,7 @@ public class Book {
     private short year;
     private Language language;
 
-    @Transient
+    @ManyToMany(mappedBy="books")
     private Set<Author> authors;
 
     public Long getId() {
