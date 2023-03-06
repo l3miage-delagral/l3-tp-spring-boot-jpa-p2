@@ -46,8 +46,6 @@ public class AuthorRepository implements CRUDRepository<Long, Author> {
         .getResultList();
     
         return res;
-}
-
     }
 
     /**
