@@ -5,11 +5,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Transient;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
 
 @Entity
 public class Book {
@@ -22,7 +22,7 @@ public class Book {
     private short year;
     private Language language;
 
-    @ManyToMany(mappedBy="books")
+    @ManyToMany(mappedBy = "books")
     private Set<Author> authors;
 
     public Long getId() {
