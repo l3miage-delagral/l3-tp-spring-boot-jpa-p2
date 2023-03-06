@@ -1,7 +1,13 @@
 package fr.uga.l3miage.library.data.domain;
 
+import jakarta.annotation.Nullable;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -9,13 +15,25 @@ import java.util.Set;
 
 
 @Entity
+@Table(name = "book")
 public class Book {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @Column(nullable = false, length = 30)
     private String title;
+
+    @Column(nullable = false)
     private long isbn;
+
+    @Column(length = 30)
     private String publisher;
+
     private short year;
+
+    @Column(length = 30)
     private Language language;
 
     @ManyToMany(mappedBy = "books")
