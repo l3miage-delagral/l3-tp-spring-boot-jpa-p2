@@ -1,6 +1,9 @@
 package fr.uga.l3miage.library.data.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Transient;
 
@@ -10,7 +13,8 @@ import java.util.Set;
 
 @Entity
 public class Book {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
     private long isbn;

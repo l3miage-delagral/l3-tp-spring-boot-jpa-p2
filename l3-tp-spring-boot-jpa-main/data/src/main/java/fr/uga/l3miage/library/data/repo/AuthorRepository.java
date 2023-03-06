@@ -41,6 +41,7 @@ public class AuthorRepository implements CRUDRepository<Long, Author> {
      */
     @Override
     public List<Author> all() {
+        
         // TODO
         return null;
     }
@@ -52,7 +53,7 @@ public class AuthorRepository implements CRUDRepository<Long, Author> {
      * @return une liste d'auteurs trié par nom
      */
     public List<Author> searchByName(String namePart) {
-        // TODO
+
         return null;
     }
 
