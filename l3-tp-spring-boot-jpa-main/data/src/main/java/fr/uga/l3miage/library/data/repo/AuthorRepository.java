@@ -41,9 +41,13 @@ public class AuthorRepository implements CRUDRepository<Long, Author> {
      */
     @Override
     public List<Author> all() {
+        String jpql = "SELECT * FROM Author ORDER BY b.fullName ASC";
         
+
+        List<Author> res = entityManager.createQuery(jpql, Author.class)
+        .getResultList();
         // TODO
-        return null;
+        return res;
     }
 
     /**
