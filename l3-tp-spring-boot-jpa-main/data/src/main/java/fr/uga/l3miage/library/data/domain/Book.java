@@ -17,10 +17,6 @@ import java.util.Set;
 @Entity
 @Table(name = "book")
 public class Book {
-<<<<<<< HEAD
-=======
-
->>>>>>> 68912bdf7098cda2166e00d19e62fe7ca09ae31a
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
