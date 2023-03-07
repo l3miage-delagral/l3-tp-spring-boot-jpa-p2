@@ -28,7 +28,7 @@ public class BookRepository implements CRUDRepository<Long, Book> {
         return entityManager.find(Book.class, id);
     }
 
-
+    
     @Override
     public void delete(Book author) {
         entityManager.remove(author);
@@ -39,8 +39,11 @@ public class BookRepository implements CRUDRepository<Long, Book> {
      * @return une liste de livres
      */
     public List<Book> all() {
-        // TODO créer les named query
-        return entityManager.createNamedQuery("all-books", Book.class).getResultList();
+        String jpql = "SELECT b FROM Book b ORDER BY b.title ASC";
+        List<Book> res = entityManager.createQuery(jpql, Book.class)
+        .getResultList();
+
+        return res;
     }
 
     /**
@@ -50,9 +53,10 @@ public class BookRepository implements CRUDRepository<Long, Book> {
      */
     public List<Book> findByContainingTitle(String titlePart) {
         // TODO créer les named query
+        String pattern = '%' + titlePart + '%';
         return entityManager.createNamedQuery("find-books-by-title", Book.class)
-                // TODO completer l'appel pour utiliser le paramètre de cette méthode
-                .getResultList();
+                            .setParameter("pattern", pattern)
+                            .getResultList();
     }
 
     /**
