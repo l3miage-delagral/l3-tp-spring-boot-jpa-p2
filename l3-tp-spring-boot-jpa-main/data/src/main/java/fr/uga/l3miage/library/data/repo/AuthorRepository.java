@@ -46,8 +46,6 @@ public class AuthorRepository implements CRUDRepository<Long, Author> {
         .getResultList();
     
         return res;
-}
-
     }
 
     /**
@@ -66,6 +64,7 @@ public class AuthorRepository implements CRUDRepository<Long, Author> {
         return res;
     }
 
+
     /**
      * Recherche si l'auteur a au moins un livre co-écrit avec un autre auteur
      *
@@ -74,6 +73,6 @@ public class AuthorRepository implements CRUDRepository<Long, Author> {
     public boolean checkAuthorByIdHavingCoAuthoredBooks(long authorId) {
         // TODO
         return false;
-    }
 
+    }
 }
