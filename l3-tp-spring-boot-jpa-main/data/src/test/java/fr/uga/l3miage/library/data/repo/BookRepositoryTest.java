@@ -58,7 +58,7 @@ class BookRepositoryTest extends Base {
         entityManager.persist(b2);
         entityManager.persist(b3);
 
-        entityManager.flush();
+        // entityManager.flush();
         entityManager.detach(b1);
         entityManager.detach(b2);
         entityManager.detach(b3);
