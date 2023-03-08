@@ -14,8 +14,7 @@ import java.util.Objects;
 import java.util.Set;
 
 
-@Entity
-@Table(name = "book")
+@Entity(name = "Book")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

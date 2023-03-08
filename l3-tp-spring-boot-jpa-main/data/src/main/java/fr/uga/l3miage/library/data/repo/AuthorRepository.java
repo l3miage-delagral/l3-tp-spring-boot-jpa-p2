@@ -1,6 +1,7 @@
 package fr.uga.l3miage.library.data.repo;
 
 import fr.uga.l3miage.library.data.domain.Author;
+import fr.uga.l3miage.library.data.domain.Book;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -64,14 +65,19 @@ public class AuthorRepository implements CRUDRepository<Long, Author> {
         return res;
     }
 
+
     /**
      * Recherche si l'auteur a au moins un livre co-écrit avec un autre auteur
      *
      * @return true si l'auteur partage
      */
     public boolean checkAuthorByIdHavingCoAuthoredBooks(long authorId) {
-        // TODO
+        Author author = entityManager.find(Author.class, authorId);
+        for (Book book: author.getBooks()){
+            if (book.getAuthors().size() > 1)
+                return true;
+        }
         return false;
     }
-
+    
 }

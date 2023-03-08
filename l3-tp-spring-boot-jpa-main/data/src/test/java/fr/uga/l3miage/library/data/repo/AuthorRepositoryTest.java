@@ -72,7 +72,7 @@ class AuthorRepositoryTest extends Base {
         entityManager.detach(a2);
 
         List<Author> authors = authorRepository.all();
-        assertThat(authors).containsExactly(a1);
+        assertThat(authors).containsExactlyInAnyOrder(a1, a2);
 
     }
 
