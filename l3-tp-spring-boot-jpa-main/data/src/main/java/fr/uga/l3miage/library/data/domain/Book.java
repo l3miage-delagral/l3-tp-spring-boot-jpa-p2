@@ -14,25 +14,27 @@ import java.util.Objects;
 import java.util.Set;
 
 
-@Entity(name = "Book")
+@Entity
+@Table(name = "Book")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
     
-    @Column(nullable = false, length = 30)
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(name = "isbn",nullable = false)
     private long isbn;
 
-    @Column(length = 30)
+    @Column(name = "publisher", length = 30)
     private String publisher;
 
-    @Column(name="yearB")
+    @Column(name = "yearB")
     private short year;
 
-    @Column(length = 30)
+    @Column(name = "language", length = 30)
     private Language language;
 
     @ManyToMany(mappedBy = "books")
