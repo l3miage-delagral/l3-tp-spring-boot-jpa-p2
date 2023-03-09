@@ -44,7 +44,7 @@ public class BorrowRepository implements CRUDRepository<String, Borrow> {
      * @param userId l'id de l'emprunteur
      * @return la liste des emprunts en cours
      */
-    public List<Borrow> findInProgressByUser(String userId) {
+    public List<Borrow> findInProgressByUser(Long userId) {
         // TODO
         return null;
     }

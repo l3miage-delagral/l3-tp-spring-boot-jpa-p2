@@ -45,7 +45,10 @@ public class UserRepository implements CRUDRepository<String, User> {
      */
     public List<User> findAllOlderThan(int age) {
         // TODO
-        return null;
+        String jpql = "SELECT p FROM Person.utilisateur p WHERE YEAR(DATEDIFF(GETDATE(), p.birth))) > :age";
+        return entityManager.createQuery(jpql, User.class)
+                .setParameter("age", age)
+                .getResultList();
     }
 
 }
