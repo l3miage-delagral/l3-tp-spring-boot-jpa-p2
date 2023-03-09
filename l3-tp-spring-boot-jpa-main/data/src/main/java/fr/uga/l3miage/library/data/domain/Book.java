@@ -29,6 +29,7 @@ public class Book {
     @Column(length = 30)
     private String publisher;
 
+    @Column(name="yearB")
     private short year;
 
     @Column(length = 30)
