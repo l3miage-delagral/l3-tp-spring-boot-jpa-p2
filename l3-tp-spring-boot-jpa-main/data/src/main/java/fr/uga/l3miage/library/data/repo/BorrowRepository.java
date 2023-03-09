@@ -55,7 +55,7 @@ public class BorrowRepository implements CRUDRepository<String, Borrow> {
      * @param userId l'id de l'emprunteur
      * @return le nombre de livre
      */
-    public int countBorrowedBooksByUser(String userId) {
+    public int countBorrowedBooksByUser(Long userId) {
         // TODO
         return 0;
     }
@@ -66,7 +66,7 @@ public class BorrowRepository implements CRUDRepository<String, Borrow> {
      * @param userId l'id de l'emprunteur
      * @return le nombre de livre
      */
-    public int countCurrentBorrowedBooksByUser(String userId) {
+    public int countCurrentBorrowedBooksByUser(Long userId) {
         // TODO
         return 0;
     }

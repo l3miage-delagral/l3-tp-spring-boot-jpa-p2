@@ -54,7 +54,6 @@ public class BookRepository implements CRUDRepository<Long, Book> {
      * @return une liste de livres
      */
     public List<Book> findByContainingTitle(String titlePart) {
-        // TODO créer les named query
 
         // String jpql = "SELECT a FROM Book a WHERE a.title ILIKE concat('%',:titlePart,'%')";
 
@@ -94,7 +93,6 @@ public class BookRepository implements CRUDRepository<Long, Book> {
      * @return une liste de livres
      */
     public List<Book> findBooksByAuthorContainingName(String namePart) {
-        // TODO créer les named query
         String jpql = "SELECT b FROM Book b JOIN b.authors a WHERE a.fullName ILIKE concat('%',:namePart,'%')";
         return entityManager.createQuery(jpql, Book.class)
                 .setParameter("namePart", namePart)
@@ -107,7 +105,6 @@ public class BookRepository implements CRUDRepository<Long, Book> {
      * @return une liste de livres
      */
     public List<Book> findBooksHavingAuthorCountGreaterThan(int count) {
-        // TODO créer les named query
         String jpql = "SELECT b FROM Book b JOIN b.authors a GROUP BY b HAVING COUNT(a) > :nombre";
 
         return entityManager.createQuery(jpql, Book.class)
