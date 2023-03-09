@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -20,7 +21,7 @@ public class Borrow {
     @Column(name = "borrow_id")
     private Long id;
 
-    @OneToOne()
+    @OneToMany
     private List<Book> books;
     
     @Column(name = "start")
@@ -32,7 +33,7 @@ public class Borrow {
     private Date requestedReturn;
     private User borrower;
 
-    @OneToOne()
+    @OneToOne
     private Librarian librarian;
     private boolean finished;
 
