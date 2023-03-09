@@ -108,7 +108,8 @@ public class BookRepository implements CRUDRepository<Long, Book> {
      */
     public List<Book> findBooksHavingAuthorCountGreaterThan(int count) {
         // TODO créer les named query
-        String jpql = "SELECT b FROM Book b JOIN b.authors a WHERE ";
+        String jpql = "SELECT b FROM Book b JOIN b.authors a GROUP BY b HAVING COUNT(a) > :nombre";
+
         return entityManager.createQuery(jpql, Book.class)
                 .setParameter("nombre", count)
                 .getResultList();
