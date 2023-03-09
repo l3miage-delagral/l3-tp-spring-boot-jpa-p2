@@ -13,7 +13,7 @@ import jakarta.persistence.TemporalType;
 // Attention le mot 'user' est reservé
 @Entity
 @Table(name="utilisateur")
-@DiscriminatorValue(value = "user")
+@DiscriminatorValue(value = "utilisateur")
 public class User extends Person {
 
     @Column(name = "registered")

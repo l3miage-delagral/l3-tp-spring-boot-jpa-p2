@@ -22,7 +22,7 @@ public abstract class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "personId")
-    private String id;
+    private Long id;
 
     @Column(name = "gender")
     private Gender gender;
@@ -40,7 +40,7 @@ public abstract class Person {
         FEMALE, MALE, FLUID
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
