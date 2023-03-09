@@ -80,6 +80,9 @@ public class BookRepository implements CRUDRepository<Long, Book> {
      */
     public List<Book> findByAuthorIdAndContainingTitle(Long authorId, String titlePart) {
         // TODO créer les named query
+
+        List<Book> containTitle = findByContainingTitle(titlePart);
+        
         return entityManager.createNamedQuery("find-books-by-author-and-title", Book.class)
                 // TODO completer l'appel pour utiliser les paramètres de cette méthode
                 .getResultList();

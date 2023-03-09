@@ -19,7 +19,7 @@ import java.util.Set;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "bookId")
     private Long id;
     
     @Column(name = "title", nullable = false)
