@@ -95,8 +95,9 @@ public class BookRepository implements CRUDRepository<Long, Book> {
      */
     public List<Book> findBooksByAuthorContainingName(String namePart) {
         // TODO créer les named query
-        return entityManager.createNamedQuery("find-books-by-authors-name", Book.class)
-                // TODO completer l'appel pour utiliser le paramètre de cette méthode
+        String jpql = "SELECT b FROM Book b JOIN b.authors a WHERE a.fullName ILIKE concat('%',:namePart,'%')";
+        return entityManager.createQuery(jpql, Book.class)
+                .setParameter("namePart", namePart)
                 .getResultList();
     }
 
@@ -107,8 +108,9 @@ public class BookRepository implements CRUDRepository<Long, Book> {
      */
     public List<Book> findBooksHavingAuthorCountGreaterThan(int count) {
         // TODO créer les named query
-        return entityManager.createNamedQuery("find-books-by-several-authors", Book.class)
-                // TODO completer l'appel pour utiliser le paramètre de cette méthode
+        String jpql = "SELECT b FROM Book b JOIN b.authors a WHERE COUNT(a)";
+        return entityManager.createQuery(jpql, Book.class)
+                .setParameter("nombre", count)
                 .getResultList();
     }
 
