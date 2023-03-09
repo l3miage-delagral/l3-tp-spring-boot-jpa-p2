@@ -3,12 +3,35 @@ package fr.uga.l3miage.library.data.domain;
 import java.util.Date;
 import java.util.Objects;
 
-public abstract class Person {
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Entity
+@DiscriminatorColumn(name = "person_type", discriminatorType = DiscriminatorType.STRING)
+public abstract class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "personId")
     private String id;
+
+    @Column(name = "gender")
     private Gender gender;
+
+    @Column(name = "fistName")
     private String firstName;
+
+    @Column(name = "lastName")
     private String lastName;
+
+    @Temporal(TemporalType.DATE)
     private Date birth;
 
     public enum Gender {

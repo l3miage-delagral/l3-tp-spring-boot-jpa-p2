@@ -2,8 +2,14 @@ package fr.uga.l3miage.library.data.domain;
 
 import java.util.Objects;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+
+@Entity
+@DiscriminatorValue(value = "librarian")
 public class Librarian extends Person {
 
+    @Column(name = "manager")
     private Librarian manager;
 
     public Librarian getManager() {
