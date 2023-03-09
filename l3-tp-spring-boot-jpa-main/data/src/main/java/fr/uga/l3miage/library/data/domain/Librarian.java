@@ -5,12 +5,14 @@ import java.util.Objects;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 
 @Entity
 @DiscriminatorValue(value = "librarian")
 public class Librarian extends Person {
 
     @Column(name = "manager")
+    @OneToOne
     private Librarian manager;
 
     public Librarian getManager() {
