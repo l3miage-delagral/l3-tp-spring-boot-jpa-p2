@@ -81,7 +81,7 @@ public class BookRepository implements CRUDRepository<Long, Book> {
     public List<Book> findByAuthorIdAndContainingTitle(Long authorId, String titlePart) {
         // List<Book> containTitle = findByContainingTitle(titlePart);
         
-        String jpql = "SELECT b FROM Book b WHERE (b.title LIKE '%' || :namePart || '%') AND (:authorId = INDEX(b.authors, 1)) ORDER BY b.title ASC";
+        String jpql = "SELECT b FROM Book b WHERE b.title LIKE '%' || :titlePart || '%' AND :authorId = INDEX(b.authors, 1) ORDER BY b.title ASC";
         return entityManager.createNamedQuery(jpql, Book.class)
                 .setParameter("titlePart", titlePart)
                 .setParameter("authorId", authorId)
