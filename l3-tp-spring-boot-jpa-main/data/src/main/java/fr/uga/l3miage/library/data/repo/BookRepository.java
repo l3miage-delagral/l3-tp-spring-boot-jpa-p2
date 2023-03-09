@@ -2,6 +2,8 @@ package fr.uga.l3miage.library.data.repo;
 
 import fr.uga.l3miage.library.data.domain.Book;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -53,10 +55,21 @@ public class BookRepository implements CRUDRepository<Long, Book> {
      */
     public List<Book> findByContainingTitle(String titlePart) {
         // TODO créer les named query
-        String pattern = '%' + titlePart + '%';
-        return entityManager.createNamedQuery("find-books-by-title", Book.class)
-                            .setParameter("pattern", pattern)
-                            .getResultList();
+
+        // String jpql = "SELECT a FROM Book a WHERE a.title ILIKE concat('%',:titlePart,'%')";
+
+        // List<Book> res = entityManager.createQuery(jpql, Book.class)
+        // .setParameter("titlePart", titlePart)
+        // .getResultList();
+
+        // return res;
+
+        
+        String jpql = "select b from Book b where b.title ilike concat('%',:titlePart,'%')";
+        List<Book> res = entityManager.createQuery(jpql, Book.class)
+                .setParameter("titlePart",titlePart)
+                .getResultList();
+        return res;
     }
 
     /**
@@ -66,10 +79,12 @@ public class BookRepository implements CRUDRepository<Long, Book> {
      * @return une liste de livres
      */
     public List<Book> findByAuthorIdAndContainingTitle(Long authorId, String titlePart) {
-        String jpql = "SELECT b FROM Book b WHERE (b.title LIKE '%' || :namePart || '%') AND (:authorId = INDEX(b.authors, 1)) ORDER BY b.title ASC";
-        return entityManager.createNamedQuery(jpql, Book.class)
-                .setParameter("titlePart", titlePart)
-                .setParameter("authorId", authorId)
+        // TODO créer les named query
+
+        List<Book> containTitle = findByContainingTitle(titlePart);
+        
+        return entityManager.createNamedQuery("find-books-by-author-and-title", Book.class)
+                // TODO completer l'appel pour utiliser les paramètres de cette méthode
                 .getResultList();
     }
 
