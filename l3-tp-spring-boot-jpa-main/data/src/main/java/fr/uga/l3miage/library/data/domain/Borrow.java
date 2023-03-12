@@ -1,5 +1,6 @@
 package fr.uga.l3miage.library.data.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -74,8 +75,8 @@ public class Borrow {
         return requestedReturn;
     }
 
-    public void setRequestedReturn(Date end) {
-        this.requestedReturn = end;
+    public void setRequestedReturn(Date date) {
+        this.requestedReturn = date;
     }
 
     public User getBorrower() {
