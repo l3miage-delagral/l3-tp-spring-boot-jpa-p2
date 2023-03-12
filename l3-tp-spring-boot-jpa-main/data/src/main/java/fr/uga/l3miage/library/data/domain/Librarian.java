@@ -11,7 +11,7 @@ import jakarta.persistence.OneToOne;
 @DiscriminatorValue(value = "librarian")
 public class Librarian extends Person {
 
-    @Column(name = "manager")
+    // @Column(name = "manager")
     @OneToOne
     private Librarian manager;
 

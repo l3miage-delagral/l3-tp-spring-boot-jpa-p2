@@ -15,10 +15,11 @@ import jakarta.persistence.TemporalType;
 @Table(name="utilisateur")
 @DiscriminatorValue(value = "utilisateur")
 public class User extends Person {
-
-    @Column(name = "registered")
+    
     @Temporal(TemporalType.DATE)
+    @Column(name = "registered")
     private Date registered;
+
     @Column(name = "lateRatio")
     private float lateRatio;
 

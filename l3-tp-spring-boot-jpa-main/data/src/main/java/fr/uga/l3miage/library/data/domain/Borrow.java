@@ -35,6 +35,7 @@ public class Borrow {
 
     @OneToOne
     private Librarian librarian;
+    
     private boolean finished;
 
     public Long getId() {
