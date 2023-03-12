@@ -6,12 +6,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 @DiscriminatorValue(value = "librarian")
 public class Librarian extends Person {
 
-    @Column(name = "manager")
+    @PrimaryKeyJoinColumn(name = "manager")
     @OneToOne
     private Librarian manager;
 
