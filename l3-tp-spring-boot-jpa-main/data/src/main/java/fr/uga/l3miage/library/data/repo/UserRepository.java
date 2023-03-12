@@ -45,7 +45,7 @@ public class UserRepository implements CRUDRepository<String, User> {
      */
     public List<User> findAllOlderThan(int age) {
         // TODO
-        String jpql = "SELECT p FROM Person.utilisateur p WHERE p.birth > :age";
+        String jpql = "SELECT p FROM User p WHERE TIMESTAMPDIFF(YEAR, p.birth, CURDATE()) > :age";
         return entityManager.createQuery(jpql, User.class)
                 .setParameter("age", age)
                 .getResultList();
