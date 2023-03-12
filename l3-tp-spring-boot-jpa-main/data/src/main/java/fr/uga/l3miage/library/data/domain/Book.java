@@ -8,11 +8,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -24,9 +28,13 @@ public class Book {
     private Long id;
     
     @Column(name = "title", nullable = false)
+    @NotNull
+    @NotBlank
     private String title;
 
     @Column(name = "isbn",nullable = false)
+    @NotNull
+    @NotBlank
     private long isbn;
 
     @Column(name = "publisher", length = 30)
@@ -39,7 +47,7 @@ public class Book {
     private Language language;
 
     @ManyToMany(mappedBy = "books")
-    private Set<Author> authors;
+    private Set<Author> authors = new HashSet<>();;
 
     public Long getId() {
         return id;
