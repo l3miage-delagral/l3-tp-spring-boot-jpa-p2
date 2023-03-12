@@ -4,13 +4,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.JoinColumns;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
@@ -31,6 +35,8 @@ public class Borrow {
     @Column(name = "requestedReturn")
     @Temporal(TemporalType.DATE)
     private Date requestedReturn;
+
+    @OneToOne
     private User borrower;
 
     @OneToOne

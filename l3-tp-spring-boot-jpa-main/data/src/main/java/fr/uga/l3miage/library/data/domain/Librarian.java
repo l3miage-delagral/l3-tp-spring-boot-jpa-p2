@@ -12,12 +12,9 @@ import jakarta.persistence.PrimaryKeyJoinColumn;
 @DiscriminatorValue(value = "librarian")
 public class Librarian extends Person {
 
-<<<<<<< HEAD
-    // @Column(name = "manager")
-=======
-    @PrimaryKeyJoinColumn(name = "manager")
->>>>>>> 44586341d1cade17d05659048d6868757218c099
+    
     @OneToOne
+    @PrimaryKeyJoinColumn( name = "manager")
     private Librarian manager;
 
     public Librarian getManager() {
