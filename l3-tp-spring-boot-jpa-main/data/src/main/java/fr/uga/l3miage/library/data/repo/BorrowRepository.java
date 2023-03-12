@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public class BorrowRepository implements CRUDRepository<String, Borrow> {
 
-    private final EntityManager entityManager;
+    private final static EntityManager entityManager;
 
     @Autowired
     public BorrowRepository(EntityManager entityManager) {
@@ -57,7 +57,7 @@ public class BorrowRepository implements CRUDRepository<String, Borrow> {
      * @param userId l'id de l'emprunteur
      * @return le nombre de livre
      */
-    public int countBorrowedBooksByUser(Long userId) {
+    public static int countBorrowedBooksByUser(Long userId) {
         return entityManager.createQuery("SELECT COUNT(DISTINCT b.book.id) FROM Borrow b WHERE b.user.id = :userId", Long.class)
         .setParameter("userId", userId)
         .getSingleResult()
