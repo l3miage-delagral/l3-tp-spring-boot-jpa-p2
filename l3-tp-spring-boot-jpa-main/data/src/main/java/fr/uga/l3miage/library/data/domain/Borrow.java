@@ -46,6 +46,7 @@ public class Borrow {
     @OneToOne
     private Librarian librarian;
     
+    @Column(name = "finished")
     private boolean finished;
 
     public Long getId() {

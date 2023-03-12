@@ -45,7 +45,7 @@ public class BorrowRepository implements CRUDRepository<String, Borrow> {
      * @return la liste des emprunts en cours
      */
     public List<Borrow> findInProgressByUser(Long userId) {
-        return entityManager.createQuery("SELECT b FROM Borrow b WHERE b.user.id = :userId AND b.returnedDate IS NULL", Borrow.class)
+        return entityManager.createQuery("SELECT b FROM Borrow b WHERE b.borrower.id = :userId AND b.finished = false", Borrow.class)
         .setParameter("userId", userId)
         .getResultList();
     }
@@ -57,7 +57,7 @@ public class BorrowRepository implements CRUDRepository<String, Borrow> {
      * @return le nombre de livre
      */
     public int countBorrowedBooksByUser(Long userId) {
-        return entityManager.createQuery("SELECT COUNT(DISTINCT b.book.id) FROM Borrow b WHERE b.user.id = :userId", Long.class)
+        return entityManager.createQuery("SELECT COUNT(DISTINCT b.borrower.id) FROM Borrow b WHERE b.borrower.id = :userId", Integer.class)
         .setParameter("userId", userId)
         .getSingleResult()
         .intValue();
@@ -70,7 +70,7 @@ public class BorrowRepository implements CRUDRepository<String, Borrow> {
      * @return le nombre de livre
      */
     public int countCurrentBorrowedBooksByUser(Long userId) {
-        return entityManager.createQuery("SELECT COUNT(b) FROM Borrow b WHERE b.user.id = :userId AND b.returnedDate IS NULL", Long.class)
+        return entityManager.createQuery("SELECT COUNT(b) FROM Borrow b WHERE b.borrower.id = :userId AND b.returnedDate IS NULL", Long.class)
         .setParameter("userId", userId)
         .getSingleResult()
         .intValue();
@@ -82,7 +82,7 @@ public class BorrowRepository implements CRUDRepository<String, Borrow> {
      * @return la liste des emprunt en retard
      */
     public List<Borrow> foundAllLateBorrow() {
-        return entityManager.createQuery("SELECT b FROM Borrow b WHERE b.returnedDate IS NULL AND b.dueDate < CURRENT_TIMESTAMP ORDER BY b.dueDate", Borrow.class)
+        return entityManager.createQuery("SELECT b FROM Borrow b WHERE b.finished = false AND b.dueDate < CURRENT_TIMESTAMP ORDER BY b.dueDate", Borrow.class)
         .getResultList();
     }
 
@@ -93,7 +93,7 @@ public class BorrowRepository implements CRUDRepository<String, Borrow> {
      * @return les emprunt qui sont bientôt en retard
      */
     public List<Borrow> findAllBorrowThatWillLateWithin(int days) {
-        return entityManager.createQuery("SELECT b FROM Borrow b WHERE b.returnedDate IS NULL AND b.dueDate BETWEEN CURRENT_TIMESTAMP AND :dueDate ORDER BY b.dueDate", Borrow.class)
+        return entityManager.createQuery("SELECT b FROM Borrow b WHERE b.finished = false IS NULL AND b.dueDate BETWEEN CURRENT_TIMESTAMP AND :dueDate ORDER BY b.dueDate", Borrow.class)
         .setParameter("dueDate", java.time.LocalDateTime.now().plusDays(days))
         .getResultList();
     }

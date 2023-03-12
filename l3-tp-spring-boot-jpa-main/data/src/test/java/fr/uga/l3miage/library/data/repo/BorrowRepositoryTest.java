@@ -83,6 +83,13 @@ class BorrowRepositoryTest extends Base {
     @Test
     void countCurrentBorrowedBooksByUser() {
 
+        // TODO
+
+    }
+
+    @Test
+    void countBorrowedBooksByUser() {
+
         Borrow inProgress = Fixtures.newBorrow(u1, l1, b1, b2);
         Borrow finished = Fixtures.newBorrow(u1, l1, b3);
         finished.setRequestedReturn(new Date());
@@ -93,13 +100,6 @@ class BorrowRepositoryTest extends Base {
 
         int nbCurrentBo = repository.countBorrowedBooksByUser(u1.getId());
         assertThat(nbCurrentBo).isEqualTo(nbCurrentBo);
-
-    }
-
-    @Test
-    void countBorrowedBooksByUser() {
-
-        // TODO
 
     }
 
