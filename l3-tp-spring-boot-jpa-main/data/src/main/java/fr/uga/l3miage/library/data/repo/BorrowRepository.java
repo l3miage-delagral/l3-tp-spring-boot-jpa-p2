@@ -82,7 +82,7 @@ public class BorrowRepository implements CRUDRepository<String, Borrow> {
      * @return la liste des emprunt en retard
      */
     public List<Borrow> foundAllLateBorrow() {
-        return entityManager.createQuery("SELECT b FROM Borrow b WHERE b.finished = false AND b.dueDate < CURRENT_TIMESTAMP ORDER BY b.dueDate", Borrow.class)
+        return entityManager.createQuery("SELECT b FROM Borrow b WHERE b.requestedDate < CURRENT_TIMESTAMP ORDER BY b.dueDate", Borrow.class)
         .getResultList();
     }
 
