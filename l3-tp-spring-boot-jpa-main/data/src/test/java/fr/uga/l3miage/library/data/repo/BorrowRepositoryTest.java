@@ -99,7 +99,7 @@ class BorrowRepositoryTest extends Base {
 
         int nbCurrentBo = repository.countBorrowedBooksByUser(u1.getId());
         assertThat(nbCurrentBo).isEqualTo(nbCurrentBo); //à compléter...
-
+        
     }
 
     @Test
