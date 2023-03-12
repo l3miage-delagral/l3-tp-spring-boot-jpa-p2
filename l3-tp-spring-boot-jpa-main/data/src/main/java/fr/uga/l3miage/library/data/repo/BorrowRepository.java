@@ -45,8 +45,11 @@ public class BorrowRepository implements CRUDRepository<String, Borrow> {
      * @return la liste des emprunts en cours
      */
     public List<Borrow> findInProgressByUser(Long userId) {
-        // TODO
-        return null;
+        String jpql = "SELECT b.borrower FROM Borrow b WHERE b.id = :userId AND b.lateRatio = 0.0 GROUP BY b.id ORDER BY COUNT(b) DESC";
+
+        return entityManager.createQuery(jpql, Borrow.class)
+                .setParameter("userId", userId)
+                .getResultList();
     }
 
     /**
@@ -56,8 +59,11 @@ public class BorrowRepository implements CRUDRepository<String, Borrow> {
      * @return le nombre de livre
      */
     public int countBorrowedBooksByUser(Long userId) {
-        // TODO
-        return 0;
+        String jpql = "SELECT COUNT(b.borrower) FROM Borrow b WHERE b.id = :userId";
+
+        return entityManager.createQuery(jpql, int.class)
+                .setParameter("userId", userId)
+                .getSingleResult();
     }
 
     /**

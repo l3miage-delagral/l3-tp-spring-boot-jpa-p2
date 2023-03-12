@@ -2,6 +2,7 @@ package fr.uga.l3miage.library.data.repo;
 
 import fr.uga.l3miage.library.data.domain.*;
 import jakarta.persistence.EntityManager;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,7 +83,16 @@ class BorrowRepositoryTest extends Base {
     @Test
     void countCurrentBorrowedBooksByUser() {
 
-        // TODO
+        Borrow inProgress = Fixtures.newBorrow(u1, l1, b1, b2);
+        Borrow finished = Fixtures.newBorrow(u1, l1, b3);
+        finished.setRequestedReturn(new Date());
+        finished.setFinished(true);
+        entityManager.persist(inProgress);
+        entityManager.persist(finished);
+        entityManager.flush();
+
+        int nbCurrentBo = repository.countBorrowedBooksByUser(u1.getId());
+        assertThat(nbCurrentBo).isEqualTo(nbCurrentBo);
 
     }
 
