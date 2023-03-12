@@ -98,7 +98,7 @@ class BorrowRepositoryTest extends Base {
         entityManager.flush();
 
         int nbCurrentBo = repository.countBorrowedBooksByUser(u1.getId());
-        assertThat(nbCurrentBo).isEqualTo(nbCurrentBo);
+        assertThat(nbCurrentBo).isEqualTo(nbCurrentBo); //à compléter...
 
     }
 
