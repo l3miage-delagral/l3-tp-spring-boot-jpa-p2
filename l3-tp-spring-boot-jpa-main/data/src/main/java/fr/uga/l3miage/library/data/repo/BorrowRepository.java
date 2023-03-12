@@ -5,6 +5,9 @@ import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -82,7 +85,7 @@ public class BorrowRepository implements CRUDRepository<String, Borrow> {
      * @return la liste des emprunt en retard
      */
     public List<Borrow> foundAllLateBorrow() {
-        return entityManager.createQuery("SELECT b FROM Borrow b WHERE b.requestedDate < CURRENT_TIMESTAMP ORDER BY b.dueDate", Borrow.class)
+        return entityManager.createQuery("SELECT b FROM Borrow b WHERE b.requestedReturn < CURRENT_DATE AND b.finished = false ORDER BY b.requestedReturn", Borrow.class)
         .getResultList();
     }
 
@@ -93,9 +96,13 @@ public class BorrowRepository implements CRUDRepository<String, Borrow> {
      * @return les emprunt qui sont bientôt en retard
      */
     public List<Borrow> findAllBorrowThatWillLateWithin(int days) {
-        return entityManager.createQuery("SELECT b FROM Borrow b WHERE b.finished = false IS NULL AND b.dueDate BETWEEN CURRENT_TIMESTAMP AND :dueDate ORDER BY b.dueDate", Borrow.class)
-        .setParameter("dueDate", java.time.LocalDateTime.now().plusDays(days))
-        .getResultList();
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime dueDate = now.plusDays(days);
+        Date dueDateAsDate = Date.from(dueDate.atZone(ZoneId.systemDefault()).toInstant());
+
+        return entityManager.createQuery("SELECT b FROM Borrow b WHERE b.finished = false AND b.requestedReturn BETWEEN CURRENT_TIMESTAMP AND :dueDate ORDER BY b.requestedReturn", Borrow.class)
+                .setParameter("dueDate", dueDateAsDate)
+                .getResultList();
     }
 
 }
