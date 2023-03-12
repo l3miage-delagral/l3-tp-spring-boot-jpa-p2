@@ -60,7 +60,7 @@ public class BorrowRepository implements CRUDRepository<String, Borrow> {
      * @return le nombre de livre
      */
     public int countBorrowedBooksByUser(Long userId) {
-        return entityManager.createQuery("SELECT COUNT(DISTINCT b.borrower.id) FROM Borrow b WHERE b.borrower.id = :userId", Integer.class)
+        return entityManager.createQuery("SELECT COUNT(DISTINCT b.borrower.id) FROM Borrow b WHERE b.borrower.id = :userId", Long.class)
         .setParameter("userId", userId)
         .getSingleResult()
         .intValue();
