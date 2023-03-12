@@ -6,12 +6,15 @@ import java.util.Objects;
 
 import javax.persistence.JoinColumns;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrimaryKeyJoinColumn;
@@ -26,6 +29,7 @@ public class Borrow {
     private Long id;
 
     @OneToMany
+    @JoinColumn(name = "borrow_id")
     private List<Book> books;
     
     @Column(name = "start")

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class LibrarianRepository implements CRUDRepository<String, Librarian> {
@@ -43,10 +44,16 @@ public class LibrarianRepository implements CRUDRepository<String, Librarian> {
      * @return les bibliothéquaires les plus actif
      */
     public List<Librarian> top3WorkingLibrarians() {
-        String jpql = "SELECT DISTINCT b.librarian FROM Borrow b GROUP BY b.librarian ORDER BY COUNT(b) DESC";
-
-        return entityManager.createQuery(jpql, Librarian.class)
-                .getResultList();
-    }
-
+            String jpql = "SELECT b.librarian, COUNT(b) FROM Borrow b GROUP BY b.librarian ORDER BY COUNT(b) DESC";
+        
+            List<Librarian> librarians = entityManager.createQuery(jpql, Object[].class)
+                    .setMaxResults(3)
+                    .getResultList()
+                    .stream()
+                    .map(obj -> (Librarian) obj[0])
+                    .collect(Collectors.toList());
+        
+            return librarians;
+        }
+        
 }
