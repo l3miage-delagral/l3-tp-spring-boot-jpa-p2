@@ -28,7 +28,8 @@ public class Borrow {
     @Column(name = "borrow_id")
     private Long id;
 
-    @ManyToMany
+    @OneToMany
+    @JoinColumn(name = "borrow_id")
     private List<Book> books;
     
     @Column(name = "start")
