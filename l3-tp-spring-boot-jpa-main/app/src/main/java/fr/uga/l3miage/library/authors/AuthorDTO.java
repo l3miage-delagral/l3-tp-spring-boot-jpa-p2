@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public record AuthorDTO(
         Long id,
-        @NotBlank(message = "full name of the author is mandatory")
+        @NotBlank(message = "date of the impression is mandatory")
         String fullName
 ) {
 }
